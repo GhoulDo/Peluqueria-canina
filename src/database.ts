@@ -1,7 +1,14 @@
-import { Sequelize } from 'sequelize';
-import { ConnectionOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
+import { Cliente } from './models/cliente';
+import { Cita } from './models/cita';
+import { DetalleFactura } from './models/detalleFactura';
+import { Factura } from './models/factura';
+import { Mascota } from './models/mascota';
+import Producto from './models/producto';
+import { Servicio } from './models/servicio';
+// ...importa otras entidades si es necesario...
 
-export const databaseConfig: ConnectionOptions = {
+export const databaseConfig: DataSourceOptions = {
     type: 'mysql',
     host: 'localhost',
     port: 3306,
@@ -9,25 +16,27 @@ export const databaseConfig: ConnectionOptions = {
     password: 'root',
     database: 'peluqueria_perros',
     entities: [
-        __dirname + '/models/*.ts'
+        Cliente,
+        Cita,
+        DetalleFactura,
+        Factura,
+        Mascota,
+        Producto,
+        Servicio
+
+        // ...agrega otras entidades aquí...
     ],
     synchronize: true,
 };
 
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: 'database.sqlite',
-});
+const AppDataSource = new DataSource(databaseConfig);
 
-const testConnection = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Conexión a la base de datos establecida con éxito.');
-  } catch (error) {
-    console.error('No se pudo conectar a la base de datos:', error);
-  }
-};
+AppDataSource.initialize()
+    .then(() => {
+        console.log('Conexión a la base de datos establecida con éxito.');
+    })
+    .catch(error => {
+        console.error('No se pudo conectar a la base de datos:', error);
+    });
 
-testConnection();
-
-export default sequelize;
+export default AppDataSource;

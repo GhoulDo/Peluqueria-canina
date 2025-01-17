@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Servicios</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/servicios.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Gestión de Servicios</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="clientes.html">Clientes</a>
+            <a href="mascotas.html">Mascotas</a>
+            <a href="inventario.html">Inventario</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="citas.html">Citas</a>
+            <a href="facturacion.html">Facturación</a>
+        </nav>
+    </header>
+    <main>
+        <section id="formulario">
+            <h2>Registrar Servicio</h2>
+            <form id="servicio-form">
+                <label for="nombre">Nombre del Servicio:</label>
+                <input type="text" id="nombre" required>
+                <label for="duracion">Duración (en minutos):</label>
+                <input type="number" id="duracion" required>
+                <label for="precio">Precio:</label>
+                <input type="number" step="0.01" id="precio" required>
+                <button type="submit">Guardar</button>
+                <button type="reset">Cancelar</button>
+            </form>
+        </section>
+        <section id="listado">
+            <h2>Listado de Servicios</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Duración</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="servicios-tbody"></tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Peluquería Canina</p>
+    </footer>
+</body>
+</html>

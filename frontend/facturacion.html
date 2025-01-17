@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Facturación</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/facturacion.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Gestión de Facturación</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="clientes.html">Clientes</a>
+            <a href="mascotas.html">Mascotas</a>
+            <a href="inventario.html">Inventario</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="citas.html">Citas</a>
+            <a href="facturacion.html">Facturación</a>
+        </nav>
+    </header>
+    <main>
+        <section id="factura-formulario">
+            <h2>Registrar Factura</h2>
+            <form id="factura-form">
+                <label for="cliente-id">ID Cliente:</label>
+                <input type="number" id="cliente-id" required>
+                <label for="total">Total:</label>
+                <input type="number" step="0.01" id="total" required>
+                <button type="submit">Guardar</button>
+                <button type="reset">Cancelar</button>
+            </form>
+        </section>
+        <section id="detalle-formulario">
+            <h2>Agregar Detalles de Factura</h2>
+            <form id="detalle-form">
+                <label for="factura-id">ID Factura:</label>
+                <input type="number" id="factura-id" required>
+                <label for="producto-id">ID Producto:</label>
+                <input type="number" id="producto-id" required>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" required>
+                <label for="subtotal">Subtotal:</label>
+                <input type="number" step="0.01" id="subtotal" required>
+                <button type="submit">Agregar Detalle</button>
+            </form>
+        </section>
+        <section id="listado-facturas">
+            <h2>Listado de Facturas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ID Cliente</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="facturas-tbody"></tbody>
+            </table>
+        </section>
+        <section id="listado-detalles">
+            <h2>Detalles de Factura</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ID Factura</th>
+                        <th>ID Producto</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="detalles-tbody"></tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Peluquería Canina</p>
+    </footer>
+</body>
+</html>

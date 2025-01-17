@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Mascotas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/mascotas.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Gestión de Mascotas</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="clientes.html">Clientes</a>
+            <a href="mascotas.html">Mascotas</a>
+            <a href="inventario.html">Inventario</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="citas.html">Citas</a>
+            <a href="facturacion.html">Facturación</a>
+        </nav>
+    </header>
+    <main>
+        <section id="formulario">
+            <h2>Registrar Mascota</h2>
+            <form id="mascota-form">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" required>
+                <label for="raza">Raza:</label>
+                <input type="text" id="raza">
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" required>
+                <label for="cliente-id">ID del Cliente:</label>
+                <input type="number" id="cliente-id" required>
+                <button type="submit">Guardar</button>
+                <button type="reset">Cancelar</button>
+            </form>
+        </section>
+        <section id="listado">
+            <h2>Listado de Mascotas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Raza</th>
+                        <th>Edad</th>
+                        <th>ID Cliente</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="mascotas-tbody"></tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Peluquería Canina</p>
+    </footer>
+</body>
+</html>

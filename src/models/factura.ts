@@ -1,3 +1,5 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
 export interface DetalleFactura {
     id: number;
     factura_id: number;
@@ -6,10 +8,18 @@ export interface DetalleFactura {
     subtotal: number;
 }
 
+@Entity()
 export class Factura {
+    @PrimaryGeneratedColumn()
     id: number;
+
+    @Column()
     cliente_id: number;
+
+    @Column()
     fecha: Date;
+
+    @Column()
     total: number;
 
     constructor(id: number, cliente_id: number, fecha: Date, total: number) {
