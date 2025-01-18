@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Clientes</title>
+    <link rel="stylesheet" href="css/Client.css">
 </head>
 <body>
 
@@ -26,25 +27,26 @@
         <label for="direccion">Dirección:</label>
         <input type="text" id="direccion" required><br><br>
 
-        <button type="submit">Guardar</button>
+        <input type="submit" value="Crear Cliente">
     </form>
 
-    <h2>Lista de Clientes</h2>
-    <table id="clientes-table" border="1">
+    <table>
         <thead>
             <tr>
                 <th>Nombre</th>
                 <th>Teléfono</th>
                 <th>Email</th>
-                <th>Acciones</th>
+                <th>Direcciones</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody id="clientes-tbody">
-            <!-- Los clientes se cargarán dinámicamente aquí -->
+            <!-- Aquí se llenarán los clientes -->
         </tbody>
     </table>
 
-    <script src="js/clientes.js"></script>
+    
 
+    <script src="js/clientes.js"></script>
 </body>
 </html>
