@@ -1,22 +1,32 @@
+import { Request, Response } from 'express';
+import { Repository } from 'typeorm';
+import AppDataSource from '../database';
+import { Mascota } from '../models/mascota';
+
 export class MascotasController {
-    private mascotas: any[] = []; // Aquí se almacenarán las mascotas en memoria
+    private mascotaRepository: Repository<Mascota>;
+
+    constructor() {
+        this.mascotaRepository = AppDataSource.getRepository(Mascota);
+    }
 
     // Crear una nueva mascota
-    public crearMascota(req: any, res: any) {
-        const mascota = req.body;
-        this.mascotas.push(mascota);
+    public async crearMascota(req: Request, res: Response) {
+        const mascota = this.mascotaRepository.create(req.body);
+        await this.mascotaRepository.save(mascota);
         res.status(201).json(mascota);
     }
 
     // Obtener todas las mascotas
-    public obtenerMascotas(req: any, res: any) {
-        res.status(200).json(this.mascotas);
+    public async obtenerMascotas(req: Request, res: Response) {
+        const mascotas = await this.mascotaRepository.find();
+        res.status(200).json(mascotas);
     }
 
     // Obtener una mascota por ID
-    public obtenerMascotaPorId(req: any, res: any) {
-        const { id } = req.params;
-        const mascota = this.mascotas.find(mascota => mascota.id === parseInt(id));
+    public async obtenerMascotaPorId(req: Request, res: Response) {
+        const id = parseInt(req.params.id); // Convertir id a número
+        const mascota = await this.mascotaRepository.findOneBy({ id });
         if (mascota) {
             res.status(200).json(mascota);
         } else {
@@ -25,24 +35,23 @@ export class MascotasController {
     }
 
     // Actualizar una mascota
-    public actualizarMascota(req: any, res: any) {
-        const { id } = req.params;
-        const datosActualizados = req.body;
-        const index = this.mascotas.findIndex(mascota => mascota.id === parseInt(id));
-        if (index !== -1) {
-            this.mascotas[index] = { ...this.mascotas[index], ...datosActualizados };
-            res.status(200).json(this.mascotas[index]);
+    public async actualizarMascota(req: Request, res: Response) {
+        const id = parseInt(req.params.id); // Convertir id a número
+        let mascota = await this.mascotaRepository.findOneBy({ id });
+        if (mascota) {
+            this.mascotaRepository.merge(mascota, req.body);
+            const resultado = await this.mascotaRepository.save(mascota);
+            res.status(200).json(resultado);
         } else {
             res.status(404).json({ mensaje: 'Mascota no encontrada' });
         }
     }
 
     // Eliminar una mascota
-    public eliminarMascota(req: any, res: any) {
-        const { id } = req.params;
-        const index = this.mascotas.findIndex(mascota => mascota.id === parseInt(id));
-        if (index !== -1) {
-            this.mascotas.splice(index, 1);
+    public async eliminarMascota(req: Request, res: Response) {
+        const id = parseInt(req.params.id); // Convertir id a número
+        const resultado = await this.mascotaRepository.delete(id);
+        if (resultado.affected) {
             res.status(200).json({ mensaje: 'Mascota eliminada' });
         } else {
             res.status(404).json({ mensaje: 'Mascota no encontrada' });

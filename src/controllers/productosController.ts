@@ -1,22 +1,32 @@
+import { Request, Response } from 'express';
+import { Repository } from 'typeorm';
+import AppDataSource from '../database';
+import { Producto } from '../models/producto';
+
 export class ProductosController {
-    private productos: any[] = []; // Aquí se almacenarán los productos en memoria
+    private productoRepository: Repository<Producto>;
+
+    constructor() {
+        this.productoRepository = AppDataSource.getRepository(Producto);
+    }
 
     // Crear un nuevo producto
-    public crearProducto(req: any, res: any) {
-        const producto = req.body;
-        this.productos.push(producto);
+    public async crearProducto(req: Request, res: Response) {
+        const producto = this.productoRepository.create(req.body);
+        await this.productoRepository.save(producto);
         res.status(201).json(producto);
     }
 
     // Obtener todos los productos
-    public obtenerProductos(req: any, res: any) {
-        res.status(200).json(this.productos);
+    public async obtenerProductos(req: Request, res: Response) {
+        const productos = await this.productoRepository.find();
+        res.status(200).json(productos);
     }
 
     // Obtener un producto por ID
-    public obtenerProductoPorId(req: any, res: any) {
-        const { id } = req.params;
-        const producto = this.productos.find(producto => producto.id === parseInt(id));
+    public async obtenerProductoPorId(req: Request, res: Response) {
+        const id = parseInt(req.params.id); // Convertir id a número
+        const producto = await this.productoRepository.findOneBy({ id });
         if (producto) {
             res.status(200).json(producto);
         } else {
@@ -25,24 +35,23 @@ export class ProductosController {
     }
 
     // Actualizar un producto
-    public actualizarProducto(req: any, res: any) {
-        const { id } = req.params;
-        const datosActualizados = req.body;
-        const index = this.productos.findIndex(producto => producto.id === parseInt(id));
-        if (index !== -1) {
-            this.productos[index] = { ...this.productos[index], ...datosActualizados };
-            res.status(200).json(this.productos[index]);
+    public async actualizarProducto(req: Request, res: Response) {
+        const id = parseInt(req.params.id); // Convertir id a número
+        let producto = await this.productoRepository.findOneBy({ id });
+        if (producto) {
+            this.productoRepository.merge(producto, req.body);
+            const resultado = await this.productoRepository.save(producto);
+            res.status(200).json(resultado);
         } else {
             res.status(404).json({ mensaje: 'Producto no encontrado' });
         }
     }
 
     // Eliminar un producto
-    public eliminarProducto(req: any, res: any) {
-        const { id } = req.params;
-        const index = this.productos.findIndex(producto => producto.id === parseInt(id));
-        if (index !== -1) {
-            this.productos.splice(index, 1);
+    public async eliminarProducto(req: Request, res: Response) {
+        const id = parseInt(req.params.id); // Convertir id a número
+        const resultado = await this.productoRepository.delete(id);
+        if (resultado.affected) {
             res.status(200).json({ mensaje: 'Producto eliminado' });
         } else {
             res.status(404).json({ mensaje: 'Producto no encontrado' });

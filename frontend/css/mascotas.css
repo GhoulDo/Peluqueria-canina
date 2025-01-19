@@ -1,0 +1,104 @@
+/* Estilos generales */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: url('DALL·E 2025-01-17 19.43.55 - A calming and inviting background for a dog spa website, featuring a soft pastel color palette (light blue, pink, and lavender). The scene includes pl.webp') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 2px solid #ff69b4;
+}
+
+header h1 {
+    color: #ff69b4;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #ff69b4;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+form label {
+    font-weight: bold;
+    color: #ff69b4;
+}
+
+form input[type="text"],
+form input[type="number"],
+form button {
+    padding: 8px;
+    border: 2px solid #ff69b4;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form button {
+    background-color: #ff69b4;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #ff1493;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th,
+table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #ff69b4;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #ff69b4;
+    color: #fff;
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}

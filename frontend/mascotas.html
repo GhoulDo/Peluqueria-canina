@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Mascotas</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/mascotas.css">
     <script src="js/mascotas.js" defer></script>
 </head>
 <body>
@@ -24,6 +24,7 @@
         <section id="formulario">
             <h2>Registrar Mascota</h2>
             <form id="mascota-form">
+                <input type="hidden" id="mascota-id">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" required>
                 <label for="tipo">Tipo:</label>
