@@ -1,11 +1,14 @@
-export class CitasController {
-    private citasService: any;
+import { Request, Response } from 'express';
+import { CitasService } from '../services/citasService';
 
-    constructor(citasService: any) {
+export class CitasController {
+    private citasService: CitasService;
+
+    constructor(citasService: CitasService) {
         this.citasService = citasService;
     }
 
-    public async crearCita(req: any, res: any) {
+    public async crearCita(req: Request, res: Response) {
         try {
             const nuevaCita = await this.citasService.crearCita(req.body);
             res.status(201).json(nuevaCita);
@@ -14,7 +17,7 @@ export class CitasController {
         }
     }
 
-    public async obtenerCitas(req: any, res: any) {
+    public async obtenerCitas(req: Request, res: Response) {
         try {
             const citas = await this.citasService.obtenerCitas();
             res.status(200).json(citas);
@@ -23,10 +26,10 @@ export class CitasController {
         }
     }
 
-    public async obtenerCitaPorId(req: any, res: any) {
+    public async obtenerCitaPorId(req: Request, res: Response) {
         try {
             const { id } = req.params;
-            const cita = await this.citasService.obtenerCitaPorId(id);
+            const cita = await this.citasService.obtenerCitaPorId(parseInt(id));
             if (cita) {
                 res.status(200).json(cita);
             } else {
@@ -37,11 +40,11 @@ export class CitasController {
         }
     }
 
-    public async actualizarCita(req: any, res: any) {
+    public async actualizarCita(req: Request, res: Response) {
         try {
             const { id } = req.params;
             const citaData = req.body;
-            const citaActualizada = await this.citasService.actualizarCita(id, citaData);
+            const citaActualizada = await this.citasService.actualizarCita(parseInt(id), citaData);
             if (citaActualizada) {
                 res.status(200).json(citaActualizada);
             } else {
@@ -52,10 +55,10 @@ export class CitasController {
         }
     }
 
-    public async eliminarCita(req: any, res: any) {
+    public async eliminarCita(req: Request, res: Response) {
         try {
             const { id } = req.params;
-            const citaEliminada = await this.citasService.eliminarCita(id);
+            const citaEliminada = await this.citasService.eliminarCita(parseInt(id));
             if (citaEliminada) {
                 res.status(200).json({ mensaje: 'Cita eliminada' });
             } else {

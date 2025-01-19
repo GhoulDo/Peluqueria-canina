@@ -7,6 +7,7 @@ import mascotasRoutes from './routes/mascotasRoutes';
 import productosRoutes from './routes/productosRoutes';
 import serviciosRoutes from './routes/serviciosRoutes';
 import facturasRoutes from './routes/facturasRoutes';
+import citasRoutes from './routes/citasRoutes';
 import { databaseConfig } from './database';
 
 const app = express();
@@ -21,6 +22,7 @@ createConnection(databaseConfig)
     .then(() => {
         console.log('Conexión a la base de datos establecida');
 
+        app.use('/api/citas', citasRoutes);
         app.use('/api/clientes', clientesRoutes);
         app.use('/api/mascotas', mascotasRoutes);
         app.use('/api/productos', productosRoutes);

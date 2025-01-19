@@ -53,9 +53,6 @@ form label {
 
 form input[type="text"],
 form input[type="number"],
-form input[type="date"],
-form input[type="time"],
-form select,
 form button {
     padding: 8px;
     border: 2px solid #ff69b4;
