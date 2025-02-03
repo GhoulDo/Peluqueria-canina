@@ -7,6 +7,7 @@ import mascotasRoutes from './routes/mascotasRoutes';
 import productosRoutes from './routes/productosRoutes';
 import serviciosRoutes from './routes/serviciosRoutes';
 import facturasRoutes from './routes/facturasRoutes';
+import detalleFacturaRoutes from './routes/detalleFacturaRoutes';
 import citasRoutes from './routes/citasRoutes';
 import { databaseConfig } from './database';
 
@@ -28,6 +29,7 @@ createConnection(databaseConfig)
         app.use('/api/productos', productosRoutes);
         app.use('/api/servicios', serviciosRoutes);
         app.use('/api/facturas', facturasRoutes);
+        app.use('/api/detalle-factura', detalleFacturaRoutes);
 
         app.listen(PORT, () => {
             console.log(`Servidor escuchando en el puerto ${PORT}`);

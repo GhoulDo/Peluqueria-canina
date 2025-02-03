@@ -1,10 +1,8 @@
 import { Router } from 'express';
 import { FacturasController } from '../controllers/facturasController';
-import { FacturacionService } from '../services/facturacionService'; // Asegúrate de que este servicio esté definido
 
 const router = Router();
-const facturacionService = new FacturacionService(); // Crea una instancia del servicio
-const facturasController = new FacturasController(facturacionService); // Pasa el servicio al controlador
+const facturasController = new FacturasController();
 
 // Rutas para las facturas
 router.post('/', (req, res) => facturasController.crearFactura(req, res));

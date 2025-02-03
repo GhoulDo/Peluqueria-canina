@@ -1,31 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-
-export interface DetalleFactura {
-    id: number;
-    factura_id: number;
-    producto_id: number;
-    cantidad: number;
-    subtotal: number;
-}
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Cliente } from './cliente';
 
 @Entity()
 export class Factura {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
-    @Column()
-    cliente_id: number;
+    @ManyToOne(() => Cliente)
+    @JoinColumn({ name: 'cliente_id' })
+    cliente!: Cliente;
 
-    @Column()
-    fecha: Date;
+    @CreateDateColumn()
+    fecha!: Date;
 
-    @Column()
-    total: number;
+    @Column('decimal', { precision: 10, scale: 2 })
+    total!: number;
 
-    constructor(id: number, cliente_id: number, fecha: Date, total: number) {
-        this.id = id;
-        this.cliente_id = cliente_id;
-        this.fecha = fecha;
+    constructor(cliente: Cliente, total: number) {
+        this.cliente = cliente;
         this.total = total;
     }
 }
